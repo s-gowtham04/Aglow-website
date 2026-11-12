@@ -100,14 +100,21 @@ export default function MetroHero({
     }
     video.addEventListener("seeked", onSeeked)
 
+    
     function seekTo(t: number) {
-      if (isSeeking) {
-        pendingTime = t
-        return
-      }
-      isSeeking = true
-      video.currentTime = t
-    }
+  if (isSeeking) {
+    pendingTime = t;
+    return;
+  }
+
+  const videoElement = videoRef.current;
+
+  if (!videoElement) return;
+
+  isSeeking = true;
+  videoElement.currentTime = t;
+}
+
 
     // Locked for the entire lifetime of this component — there is no
     // release valve in either direction. Scroll input only ever moves
